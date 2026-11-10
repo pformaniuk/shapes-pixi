@@ -1,5 +1,5 @@
 import type { ShapeKind } from "../config";
-import { regularPolygonPoints } from "../geometry";
+import { randomRadius, regularPolygonPoints } from "../geometry";
 import { FallingShape } from "./FallingShape";
 
 export class PolygonShape extends FallingShape {
@@ -14,7 +14,7 @@ export class PolygonShape extends FallingShape {
   }
 
   rebuild(rng: () => number, sizeScale: number): void {
-    const radius = (22 + rng() * 24) * sizeScale;
+    const radius = randomRadius(rng, sizeScale, 24);
     this.paintPolygon(
       regularPolygonPoints(this.sides, radius),
       rng() * Math.PI * 2,

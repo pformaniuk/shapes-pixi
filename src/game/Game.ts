@@ -154,7 +154,7 @@ export class Game {
 
     this.playfield.position.set(x, y);
     this.playfield.resize(width, height);
-    this.sizeScale = Math.min(1, Math.max(0.55, width / 640));
+    this.sizeScale = Math.min(1, Math.max(0.85, width / 640));
     this.hud.place(x, y, width, height);
   }
 }

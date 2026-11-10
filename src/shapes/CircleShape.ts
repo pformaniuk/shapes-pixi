@@ -1,12 +1,12 @@
 import { ShapeKind } from "../config";
-import { randomColor } from "../geometry";
+import { randomColor, randomRadius } from "../geometry";
 import { FallingShape } from "./FallingShape";
 
 export class CircleShape extends FallingShape {
   readonly kind = ShapeKind.Circle;
 
   rebuild(rng: () => number, sizeScale: number): void {
-    const radius = (16 + rng() * 22) * sizeScale;
+    const radius = randomRadius(rng, sizeScale, 18);
     this.clear();
     this.circle(0, 0, radius)
       .fill({ color: randomColor(rng) })

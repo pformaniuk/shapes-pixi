@@ -1,6 +1,18 @@
+import { MIN_SHAPE_RADIUS } from "./config";
+
 export interface Point {
   x: number;
   y: number;
+}
+
+/** Radius is never below `minimum`, even when `sizeScale` shrinks the playfield. */
+export function randomRadius(
+  rng: () => number,
+  sizeScale: number,
+  spread: number,
+  minimum = MIN_SHAPE_RADIUS,
+): number {
+  return minimum + rng() * spread * sizeScale;
 }
 
 export function randomColor(rng: () => number): number {

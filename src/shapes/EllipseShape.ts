@@ -1,13 +1,13 @@
-import { ShapeKind } from "../config";
-import { randomColor } from "../geometry";
+import { MIN_SHAPE_RADIUS, ShapeKind } from "../config";
+import { randomColor, randomRadius } from "../geometry";
 import { FallingShape } from "./FallingShape";
 
 export class EllipseShape extends FallingShape {
   readonly kind = ShapeKind.Ellipse;
 
   rebuild(rng: () => number, sizeScale: number): void {
-    const radiusX = (22 + rng() * 26) * sizeScale;
-    const radiusY = (12 + rng() * 16) * sizeScale;
+    const radiusY = randomRadius(rng, sizeScale, 14, MIN_SHAPE_RADIUS * 0.72);
+    const radiusX = randomRadius(rng, sizeScale, 24, radiusY + 8);
     const rotation = rng() * Math.PI;
     this.clear();
     this.ellipse(0, 0, radiusX, radiusY)

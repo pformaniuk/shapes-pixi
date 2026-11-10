@@ -34,3 +34,6 @@ export const RATE_MAX = 8;
 
 /** Recycled graphics kept per shape type before extras are destroyed. */
 export const POOL_LIMIT = 24;
+
+/** Smallest radius in pixels. Keeps shapes readable on a phone. */
+export const MIN_SHAPE_RADIUS = 50;
