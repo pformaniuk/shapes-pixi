@@ -1,0 +1,122 @@
+html,
+body {
+    margin: 0;
+    height: 100%;
+    background: #12181f;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+#app {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+}
+
+#pixi-container,
+#pixi-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+
+.stats,
+.controls {
+    pointer-events: auto;
+}
+
+.stats {
+    align-self: flex-start;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.14);
+    color: #0f172a;
+    font: 600 15px/1.45 "Segoe UI", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+
+.stats p {
+    margin: 0;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.14);
+    color: #0f172a;
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif;
+}
+
+.label {
+    user-select: none;
+}
+
+.control span:not(.label) {
+    min-width: 2ch;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #0f172a;
+    color: #fff;
+    font: 600 22px/1 system-ui, sans-serif;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+button:hover:not(:disabled) {
+    background: #1e293b;
+}
+
+button:disabled {
+    background: #94a3b8;
+    cursor: default;
+}
+
+@media (max-width: 520px) {
+    .stats {
+        font-size: 13px;
+    }
+
+    .control {
+        font-size: 13px;
+        padding-left: 10px;
+    }
+
+    button {
+        width: 36px;
+        height: 36px;
+    }
+}
