@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="stylesheet" href="/style.css">
+    <title>Falling Shapes</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="pixi-container"></div>
+        <div id="hud">
+            <div class="stats">
+                <p>Shapes: <span id="shape-count">0</span></p>
+                <p>Area: <span id="shape-area">0</span> px²</p>
+            </div>
+            <div class="controls">
+                <div class="control">
+                    <span class="label">Shapes / sec</span>
+                    <button type="button" id="rate-dec" aria-label="Decrease shapes per second">−</button>
+                    <span id="rate-value">1</span>
+                    <button type="button" id="rate-inc" aria-label="Increase shapes per second">+</button>
+                </div>
+                <div class="control">
+                    <span class="label">Gravity</span>
+                    <button type="button" id="gravity-dec" aria-label="Decrease gravity">−</button>
+                    <span id="gravity-value">160</span>
+                    <button type="button" id="gravity-inc" aria-label="Increase gravity">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

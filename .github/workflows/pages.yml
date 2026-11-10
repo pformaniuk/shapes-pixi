@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Publish site
 
 on:
   push:
@@ -6,16 +6,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  build:
+  publish:
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -33,18 +32,24 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+      - name: Copy the build to the repository root
+        run: |
+          rm -rf assets
+          mkdir -p assets
+          cp -R dist/assets/. assets/
+          cp dist/index.html index.html
+          cp dist/style.css style.css
+          cp dist/favicon.png favicon.png
+          touch .nojekyll
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Commit the published site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets style.css favicon.png .nojekyll
+          if git diff --staged --quiet; then
+            echo "Published files are already up to date"
+            exit 0
+          fi
+          git commit -m "Publish the built site [skip ci]"
+          git push
